@@ -1,5 +1,5 @@
 // src/components/CampaignTracker.jsx
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import ActSelector from './ActSelector';
@@ -7,11 +7,11 @@ import LocationNavigator from './LocationNavigator';
 import CurrentLocation from './CurrentLocation';
 import NextLocation from './NextLocation';
 import { useCampaignData } from '../hooks/useCampaignData';
+import { useProgressPersistence } from '../hooks/useProgressPersistence';
 
 const CampaignTracker = () => {
   const { campaignData, loading } = useCampaignData();
-  const [selectedActId, setSelectedActId] = useState(1);
-  const [selectedLocationId, setSelectedLocationId] = useState(1);
+  const { selectedActId, selectedLocationId, updateProgress, clearProgress } = useProgressPersistence();
 
   if (loading || !campaignData) {
     return (
@@ -38,11 +38,10 @@ const CampaignTracker = () => {
   }
 
   const handleActChange = (actId) => {
-    setSelectedActId(actId);
     const newAct = campaignData.acts.find(act => act.actId === actId);
     const firstLocation = newAct?.locations.sort((a, b) => a.order - b.order)[0];
     if (firstLocation) {
-      setSelectedLocationId(firstLocation.locationId);
+      updateProgress(actId, firstLocation.locationId);
     }
   };
 
@@ -52,7 +51,7 @@ const CampaignTracker = () => {
     
     if (locationInCurrentAct) {
       // Location is in current act, just change location
-      setSelectedLocationId(locationId);
+      updateProgress(selectedActId, locationId);
     } else {
       // Location might be in a different act, find which act it belongs to
       const targetAct = campaignData.acts.find(act => 
@@ -60,15 +59,14 @@ const CampaignTracker = () => {
       );
       
       if (targetAct) {
-        setSelectedActId(targetAct.actId);
-        setSelectedLocationId(locationId);
+        updateProgress(targetAct.actId, locationId);
       }
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col">
-      <Header />
+      <Header clearProgress={clearProgress} />
       
       <div className="flex-1">
         <ActSelector

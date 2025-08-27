@@ -12,16 +12,29 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-gray-200 mb-3">Creator</h3>
             <div className="space-y-2">
               <p className="text-gray-400 text-sm">Created by Levisaxos</p>
-              <a 
-                href="https://github.com/Levisaxos" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors text-sm"
-              >
-                <Github className="w-4 h-4" />
-                <span>GitHub Profile</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
+              <div>
+                <a 
+                  href="https://github.com/Levisaxos" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors text-sm"
+                >
+                  <Github className="w-4 h-4" />
+                  <span>GitHub Profile</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+              <div>
+                <a 
+                  href="https://claude.ai" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-1 text-gray-500 hover:text-gray-400 transition-colors text-xs"
+                >
+                  <span>Built with assistance from Claude AI</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
             </div>
           </div>
 
