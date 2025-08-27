@@ -1,5 +1,6 @@
 // src/components/CampaignTracker.jsx
 import React from 'react';
+import { ChevronRight } from 'lucide-react';
 import Header from './Header';
 import Footer from './Footer';
 import ActSelector from './ActSelector';
@@ -12,6 +13,7 @@ import { useCampaignData } from '../hooks/useCampaignData';
 import { useBuildData } from '../hooks/useBuildData';
 import { useProgressPersistence } from '../hooks/useProgressPersistence';
 import { useBuildPersistence } from '../hooks/useBuildPersistence';
+import { useOptionsPersistence } from '../hooks/useOptionsPersistence';
 import { useUsageAnalytics } from '../hooks/useUsageAnalytics';
 
 const CampaignTracker = () => {
@@ -19,6 +21,7 @@ const CampaignTracker = () => {
   const { buildsData, loading: buildsLoading } = useBuildData();
   const { selectedActId, selectedLocationId, updateProgress, clearProgress } = useProgressPersistence();
   const { selectedBuildId, setSelectedBuildId, clearSelectedBuild } = useBuildPersistence();
+  const { options, setOptions } = useOptionsPersistence();
   
   // Track usage analytics
   const { getAnalytics } = useUsageAnalytics();
@@ -47,8 +50,20 @@ const CampaignTracker = () => {
     }
   }
 
-  // Get selected build
-  const selectedBuild = buildsData?.builds.find(build => build.buildId === selectedBuildId) || null;
+  // Check for previous location in current act first
+  let previousLocation = sortedLocations.find(loc => loc.order === (currentLocation?.order || 0) - 1);
+  
+  // If no previous location in current act, try to get last location of previous act
+  if (!previousLocation) {
+    const previousAct = campaignData.acts.find(act => act.actId === selectedActId - 1);
+    if (previousAct && previousAct.locations.length > 0) {
+      const previousActSortedLocations = previousAct.locations.sort((a, b) => a.order - b.order);
+      previousLocation = previousActSortedLocations[previousActSortedLocations.length - 1];
+    }
+  }
+
+  // Get selected build (only if builds are enabled)
+  const selectedBuild = (options.showBuilds && buildsData?.builds.find(build => build.buildId === selectedBuildId)) || null;
 
   const handleActChange = (actId) => {
     const newAct = campaignData.acts.find(act => act.actId === actId);
@@ -80,7 +95,9 @@ const CampaignTracker = () => {
   // Handle reset progress - clear both campaign and build progress
   const handleResetProgress = () => {
     clearProgress();
-    clearSelectedBuild();
+    if (options.showBuilds) {
+      clearSelectedBuild();
+    }
   };
 
   const handleBuildChange = (buildId) => {
@@ -91,10 +108,22 @@ const CampaignTracker = () => {
     clearSelectedBuild();
   };
 
+  const handleOptionsChange = (newOptions) => {
+    // If builds are disabled, clear selected build
+    if (!newOptions.showBuilds && selectedBuildId) {
+      clearSelectedBuild();
+    }
+    setOptions(newOptions);
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col">
       <DisclaimerBanner />
-      <Header clearProgress={handleResetProgress} />
+      <Header 
+        clearProgress={handleResetProgress}
+        options={options}
+        onOptionsChange={handleOptionsChange}
+      />
       
       <div className="flex-1">
         <ActSelector
@@ -103,8 +132,8 @@ const CampaignTracker = () => {
           onActChange={handleActChange}
         />
         
-        {/* Build Selector - positioned between Act and Location selectors */}
-        {buildsData && buildsData.builds && buildsData.builds.length > 0 && (
+        {/* Build Selector - only show if builds are enabled */}
+        {options.showBuilds && buildsData && buildsData.builds && buildsData.builds.length > 0 && (
           <div className="bg-gray-900 border-b border-gray-800 px-6 py-3">
             <BuildSelector
               builds={buildsData.builds}
@@ -121,21 +150,42 @@ const CampaignTracker = () => {
           onLocationChange={handleLocationChange}
         />
 
-        <div className="flex flex-col lg:flex-row min-h-[calc(100vh-200px)]">
-          <div className="flex-1 lg:flex-[2]">
+        <div className={`flex min-h-[calc(100vh-200px)] ${
+          options.showNextLocation ? 'flex-col lg:flex-row' : 'flex-row'
+        }`}>
+          <div className={`flex-1 ${options.showNextLocation ? 'lg:flex-[2]' : ''}`}>
             <CurrentLocation 
               location={currentLocation}
               selectedBuild={selectedBuild}
+              previousLocation={previousLocation}
+              onLocationChange={handleLocationChange}
+              showLevelTips={options.showLevelTips}
             />
           </div>
           
-          <div className="flex-1 border-t lg:border-t-0 lg:border-l border-gray-800">
-            <NextLocation 
-              location={nextLocation} 
-              onLocationChange={handleLocationChange}
-              selectedBuild={selectedBuild}
-            />
-          </div>
+          {options.showNextLocation && (
+            <div className="flex-1 border-t lg:border-t-0 lg:border-l border-gray-800">
+              <NextLocation 
+                location={nextLocation} 
+                selectedBuild={selectedBuild}
+                showLevelTips={options.showLevelTips}
+              />
+            </div>
+          ) }            
+            <div className="flex items-center justify-center border-l border-gray-800">
+              <button
+                onClick={() => nextLocation && handleLocationChange(nextLocation.locationId)}
+                disabled={!nextLocation}
+                className={`h-full px-4 transition-colors flex items-center ${
+                  nextLocation 
+                    ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-800 cursor-pointer' 
+                    : 'text-gray-600 cursor-not-allowed'
+                }`}
+                title={nextLocation ? `Go to next: ${nextLocation.locationName}` : 'No next location'}
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>          
         </div>
       </div>
       
