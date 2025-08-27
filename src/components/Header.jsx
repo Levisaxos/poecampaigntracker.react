@@ -3,9 +3,7 @@ import { RotateCcw } from 'lucide-react';
 
 const Header = ({ clearProgress }) => {
   const handleResetProgress = () => {
-    if (window.confirm('Are you sure you want to reset your progress? This will take you back to Act 1, The Riverbank.')) {
       clearProgress();
-    }
   };
 
   return (
