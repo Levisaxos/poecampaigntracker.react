@@ -25,8 +25,6 @@ export const campaignData = {
           locationId: 2,
           locationName: "The Clearfell Encampment (Town)",
           order: 2,
-          areaLevel: 2,
-          clearingStrategy: "fast",
           actions: [
             {
               actionId: 1,
@@ -50,7 +48,7 @@ export const campaignData = {
           locationId: 3,
           locationName: "Clearfell",
           order: 3,
-          areaLevel: 3,
+          areaLevel: 2,
           clearingStrategy: "fast",
           actions: [
             {
@@ -84,8 +82,8 @@ export const campaignData = {
           locationId: 4,
           locationName: "The Mud Burrow",
           order: 4,
-          areaLevel: 4,
-          clearingStrategy: "fast",
+          areaLevel: 3,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -109,6 +107,8 @@ export const campaignData = {
           locationId: 5,
           locationName: "The Grelwood (Part 1)",
           order: 5,
+          areaLevel: 4,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -174,6 +174,8 @@ export const campaignData = {
           locationId: 6,
           locationName: "The Red Vale and The Grelwood (Part 2)",
           order: 6,
+          areaLevel: 5,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -238,6 +240,8 @@ export const campaignData = {
           locationId: 7,
           locationName: "The Grim Tangle",
           order: 7,
+          areaLevel: 6,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -261,6 +265,8 @@ export const campaignData = {
           locationId: 8,
           locationName: "The Cemetery of the Eternals (Part 1)",
           order: 8,
+          areaLevel: 7,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -285,6 +291,8 @@ export const campaignData = {
           locationId: 9,
           locationName: "Mausoleum of the Praetor",
           order: 9,
+          areaLevel: 9,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -316,6 +324,8 @@ export const campaignData = {
           locationId: 10,
           locationName: "Tomb of the Consort",
           order: 10,
+          areaLevel: 9,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -348,6 +358,8 @@ export const campaignData = {
           locationId: 11,
           locationName: "The Cemetery of the Eternals (Part 2)",
           order: 11,
+          areaLevel: 9,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -381,6 +393,8 @@ export const campaignData = {
           locationId: 12,
           locationName: "The Hunting Grounds",
           order: 12,
+          areaLevel: 10,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -428,6 +442,8 @@ export const campaignData = {
           locationId: 13,
           locationName: "Freythorn (Permanent Buff Side Quest)",
           order: 13,
+          areaLevel: 11,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -487,6 +503,8 @@ export const campaignData = {
           locationId: 14,
           locationName: "Ogham Farmlands",
           order: 14,
+          areaLevel: 12,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -527,6 +545,8 @@ export const campaignData = {
           locationId: 15,
           locationName: "Ogham Village",
           order: 15,
+          areaLevel: 13,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -567,6 +587,8 @@ export const campaignData = {
           locationId: 16,
           locationName: "The Manor Ramparts",
           order: 16,
+          areaLevel: 14,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -615,6 +637,8 @@ export const campaignData = {
           locationId: 17,
           locationName: "Ogham Manor",
           order: 17,
+          areaLevel: 15,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,
@@ -653,6 +677,8 @@ export const campaignData = {
           locationId: 18,
           locationName: "Vastiri Outskirts",
           order: 1,
+          areaLevel: 16,
+          clearingStrategy: "unknown",
           actions: [
             {
               actionId: 1,

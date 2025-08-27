@@ -20,7 +20,7 @@ const CurrentLocation = ({ location }) => {
           <div className="flex items-center space-x-4">
             <h2 className="text-3xl font-bold text-gray-200">{location.locationName}</h2>
             <span className="text-sm text-blue-400 bg-blue-900 px-2 py-1 rounded border border-blue-700">
-              Level {location.areaLevel || 'Unknown'}
+              Area Level: {location.areaLevel || 'Unknown'}
             </span>
           </div>
           <LevelingTips location={location} showStrategyOnly={true} />

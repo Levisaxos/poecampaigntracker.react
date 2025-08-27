@@ -5,7 +5,6 @@ const DisclaimerBanner = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if user has already dismissed the banner
     const dismissed = localStorage.getItem('poe2-disclaimer-dismissed');
     if (!dismissed) {
       setIsVisible(true);
@@ -31,6 +30,7 @@ const DisclaimerBanner = () => {
               <p className="mb-2">
                 <strong>Personal Project Notice:</strong> This tool was created for personal use and is optimized for my specific playstyle and goals. 
                 While I've made it public, please understand that it may not suit everyone's needs perfectly.
+                This project is not finished and will be ongoing during the leagues and future leagues that I play.
               </p>
               <p>
                 You can report bugs or suggest improvements on{' '}

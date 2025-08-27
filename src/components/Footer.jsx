@@ -1,4 +1,3 @@
-// src/components/Footer.jsx
 import React, { useState, useEffect } from 'react';
 import { ExternalLink, Github, Shield, Eye } from 'lucide-react';
 
@@ -6,12 +5,10 @@ const Footer = ({ getAnalytics }) => {
   const [uniqueUserCount, setUniqueUserCount] = useState(null);
 
   useEffect(() => {
-    // Get analytics data to display unique user count
     if (getAnalytics) {
       try {
         const currentAnalytics = getAnalytics();
         if (currentAnalytics) {
-          // Use total visits as our "unique user" count for now
           const totalVisits = currentAnalytics.totalVisits || 0;
           setUniqueUserCount(totalVisits);
         }
@@ -93,7 +90,7 @@ const Footer = ({ getAnalytics }) => {
                 <div className="pt-2 border-t border-gray-800">
                   <div className="inline-flex items-center space-x-2 text-gray-400 text-xs">
                     <Eye className="w-3 h-3" />
-                    <span>Your visits: {uniqueUserCount}</span>
+                    <span>Unique visitors: {uniqueUserCount}</span>
                   </div>
                 </div>
               )}
