@@ -57,7 +57,7 @@ const Footer = ({ getAnalytics }) => {
           <div>
             <h3 className="text-lg font-semibold text-gray-200 mb-3">Source</h3>
             <div className="space-y-2">
-              <p className="text-gray-400 text-sm">Based on the comprehensive guide from:</p>
+              <p className="text-gray-400 text-sm">Based on the comprehensive guide by ZiggyD from:</p>
               <a 
                 href="https://maxroll.gg/poe2/getting-started/comprehensive-league-start-leveling-guide" 
                 target="_blank" 
