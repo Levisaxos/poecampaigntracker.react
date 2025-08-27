@@ -1,9 +1,9 @@
 // src/components/CurrentLocation.jsx
 import React from 'react';
-import { ChevronLeft } from 'lucide-react';
 import ActionItem from './ActionItem';
 import LevelingTips from './LevelingTips';
 import BuildSkills from './BuildSkills';
+import NavigationChevron from './NavigationChevron';
 
 const CurrentLocation = ({ location, selectedBuild, previousLocation, onLocationChange, showLevelTips }) => {
   if (!location) {
@@ -24,21 +24,13 @@ const CurrentLocation = ({ location, selectedBuild, previousLocation, onLocation
 
   return (
     <div className="flex bg-gray-900 min-h-full">
-      {/* Left Navigation Sidebar - Always visible */}
-      <div className="flex items-center justify-center border-r border-gray-800">
-        <button
-          onClick={handlePreviousClick}
-          disabled={!previousLocation}
-          className={`h-full px-4 transition-colors flex items-center ${
-            previousLocation 
-              ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-800 cursor-pointer' 
-              : 'text-gray-600 cursor-not-allowed'
-          }`}
-          title={previousLocation ? `Go to previous: ${previousLocation.locationName}` : 'No previous location'}
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-      </div>
+      {/* Left Navigation Sidebar */}
+      <NavigationChevron
+        location={previousLocation}
+        direction="left"
+        onClick={handlePreviousClick}
+        disabled={!previousLocation}
+      />
 
       {/* Main Content */}
       <div className="flex-1 p-6">

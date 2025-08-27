@@ -20,3 +20,8 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* Custom gray shade for navigation sidebars */
+.bg-gray-850 {
+  background-color: #1f2937cc;
+}

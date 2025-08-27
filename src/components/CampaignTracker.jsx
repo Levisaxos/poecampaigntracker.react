@@ -1,6 +1,5 @@
 // src/components/CampaignTracker.jsx
 import React from 'react';
-import { ChevronRight } from 'lucide-react';
 import Header from './Header';
 import Footer from './Footer';
 import ActSelector from './ActSelector';
@@ -9,6 +8,7 @@ import CurrentLocation from './CurrentLocation';
 import NextLocation from './NextLocation';
 import BuildSelector from './BuildSelector';
 import DisclaimerBanner from './DisclaimerBanner';
+import NavigationChevron from './NavigationChevron';
 import { useCampaignData } from '../hooks/useCampaignData';
 import { useBuildData } from '../hooks/useBuildData';
 import { useProgressPersistence } from '../hooks/useProgressPersistence';
@@ -116,6 +116,12 @@ const CampaignTracker = () => {
     setOptions(newOptions);
   };
 
+  const handleNextClick = () => {
+    if (nextLocation) {
+      handleLocationChange(nextLocation.locationId);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col">
       <DisclaimerBanner />
@@ -171,21 +177,15 @@ const CampaignTracker = () => {
                 showLevelTips={options.showLevelTips}
               />
             </div>
-          ) }            
-            <div className="flex items-center justify-center border-l border-gray-800">
-              <button
-                onClick={() => nextLocation && handleLocationChange(nextLocation.locationId)}
-                disabled={!nextLocation}
-                className={`h-full px-4 transition-colors flex items-center ${
-                  nextLocation 
-                    ? 'text-gray-400 hover:text-gray-200 hover:bg-gray-800 cursor-pointer' 
-                    : 'text-gray-600 cursor-not-allowed'
-                }`}
-                title={nextLocation ? `Go to next: ${nextLocation.locationName}` : 'No next location'}
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-            </div>          
+          )}
+          
+          {/* Right Navigation Chevron */}
+          <NavigationChevron
+            location={nextLocation}
+            direction="right"
+            onClick={handleNextClick}
+            disabled={!nextLocation}
+          />
         </div>
       </div>
       
