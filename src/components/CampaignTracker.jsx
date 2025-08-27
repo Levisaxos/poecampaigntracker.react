@@ -7,13 +7,16 @@ import LocationNavigator from './LocationNavigator';
 import CurrentLocation from './CurrentLocation';
 import NextLocation from './NextLocation';
 import DisclaimerBanner from './DisclaimerBanner';
+import BuildTracker from './BuildTracker';
 import { useCampaignData } from '../hooks/useCampaignData';
 import { useProgressPersistence } from '../hooks/useProgressPersistence';
+import { useBuildPersistence } from '../hooks/useBuildPersistence';
 import { useUsageAnalytics } from '../hooks/useUsageAnalytics';
 
 const CampaignTracker = () => {
   const { campaignData, loading } = useCampaignData();
   const { selectedActId, selectedLocationId, updateProgress, clearProgress } = useProgressPersistence();
+  const { selectedBuildId, setSelectedBuildId, clearSelectedBuild } = useBuildPersistence();
   
   // Track usage analytics
   const { getAnalytics } = useUsageAnalytics();
@@ -69,10 +72,30 @@ const CampaignTracker = () => {
     }
   };
 
+  // Handle reset progress - clear both campaign and build progress
+  const handleResetProgress = () => {
+    console.log('Reset progress called');
+    clearProgress();
+    clearSelectedBuild();
+    console.log('Reset progress completed');
+  };
+
+  console.log('CampaignTracker - selectedBuildId:', selectedBuildId, 'setSelectedBuildId:', typeof setSelectedBuildId);
+
+  // Get current area level from selected location
+  const currentAreaLevel = currentLocation?.areaLevel || 1;
+
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col">
       <DisclaimerBanner />
-      <Header clearProgress={clearProgress} />
+      <Header clearProgress={handleResetProgress} />
+      
+      {/* Build Tracker - positioned on the left side */}
+      <BuildTracker 
+        currentAreaLevel={currentAreaLevel} 
+        selectedBuildId={selectedBuildId}
+        setSelectedBuildId={setSelectedBuildId}
+      />
       
       <div className="flex-1">
         <ActSelector
@@ -88,7 +111,7 @@ const CampaignTracker = () => {
         />
 
         <div className="flex flex-col lg:flex-row min-h-[calc(100vh-200px)]">
-          <div className="flex-1 lg:flex-[2]">
+          <div className="flex-1 lg:flex-[2] ml-12">
             <CurrentLocation location={currentLocation} />
           </div>
           
