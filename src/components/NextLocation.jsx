@@ -1,8 +1,9 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import LevelingTips from './LevelingTips';
+import BuildSkills from './BuildSkills';
 
-const NextLocation = ({ location, onLocationChange }) => {
+const NextLocation = ({ location, onLocationChange, selectedBuild }) => {
   if (!location) {
     return (
       <div className="p-6 bg-gray-800">
@@ -60,6 +61,14 @@ const NextLocation = ({ location, onLocationChange }) => {
       </div>
 
       <LevelingTips location={location} showSummaryOnly={true} />
+
+      {selectedBuild && (
+        <BuildSkills 
+          build={selectedBuild} 
+          currentAreaLevel={location.areaLevel || 1}
+          showSummaryOnly={true}
+        />
+      )}
     </div>
   );
 };

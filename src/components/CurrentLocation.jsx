@@ -1,8 +1,9 @@
 import React from 'react';
 import ActionItem from './ActionItem';
 import LevelingTips from './LevelingTips';
+import BuildSkills from './BuildSkills';
 
-const CurrentLocation = ({ location }) => {
+const CurrentLocation = ({ location, selectedBuild }) => {
   if (!location) {
     return (
       <div className="p-6 bg-gray-900">
@@ -39,6 +40,13 @@ const CurrentLocation = ({ location }) => {
       </div>
 
       <LevelingTips location={location} />
+
+      {selectedBuild && (
+        <BuildSkills 
+          build={selectedBuild} 
+          currentAreaLevel={location.areaLevel || 1}
+        />
+      )}
     </div>
   );
 };

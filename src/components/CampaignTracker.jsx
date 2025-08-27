@@ -6,22 +6,24 @@ import ActSelector from './ActSelector';
 import LocationNavigator from './LocationNavigator';
 import CurrentLocation from './CurrentLocation';
 import NextLocation from './NextLocation';
+import BuildSelector from './BuildSelector';
 import DisclaimerBanner from './DisclaimerBanner';
-import BuildTracker from './BuildTracker';
 import { useCampaignData } from '../hooks/useCampaignData';
+import { useBuildData } from '../hooks/useBuildData';
 import { useProgressPersistence } from '../hooks/useProgressPersistence';
 import { useBuildPersistence } from '../hooks/useBuildPersistence';
 import { useUsageAnalytics } from '../hooks/useUsageAnalytics';
 
 const CampaignTracker = () => {
-  const { campaignData, loading } = useCampaignData();
+  const { campaignData, loading: campaignLoading } = useCampaignData();
+  const { buildsData, loading: buildsLoading } = useBuildData();
   const { selectedActId, selectedLocationId, updateProgress, clearProgress } = useProgressPersistence();
   const { selectedBuildId, setSelectedBuildId, clearSelectedBuild } = useBuildPersistence();
   
   // Track usage analytics
   const { getAnalytics } = useUsageAnalytics();
 
-  if (loading || !campaignData) {
+  if (campaignLoading || buildsLoading || !campaignData) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
         <div className="text-xl">Loading...</div>
@@ -44,6 +46,9 @@ const CampaignTracker = () => {
       nextLocation = nextActSortedLocations[0];
     }
   }
+
+  // Get selected build
+  const selectedBuild = buildsData?.builds.find(build => build.buildId === selectedBuildId) || null;
 
   const handleActChange = (actId) => {
     const newAct = campaignData.acts.find(act => act.actId === actId);
@@ -74,28 +79,22 @@ const CampaignTracker = () => {
 
   // Handle reset progress - clear both campaign and build progress
   const handleResetProgress = () => {
-    console.log('Reset progress called');
     clearProgress();
     clearSelectedBuild();
-    console.log('Reset progress completed');
   };
 
-  console.log('CampaignTracker - selectedBuildId:', selectedBuildId, 'setSelectedBuildId:', typeof setSelectedBuildId);
+  const handleBuildChange = (buildId) => {
+    setSelectedBuildId(buildId);
+  };
 
-  // Get current area level from selected location
-  const currentAreaLevel = currentLocation?.areaLevel || 1;
+  const handleClearBuild = () => {
+    clearSelectedBuild();
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col">
       <DisclaimerBanner />
       <Header clearProgress={handleResetProgress} />
-      
-      {/* Build Tracker - positioned on the left side */}
-      <BuildTracker 
-        currentAreaLevel={currentAreaLevel} 
-        selectedBuildId={selectedBuildId}
-        setSelectedBuildId={setSelectedBuildId}
-      />
       
       <div className="flex-1">
         <ActSelector
@@ -104,6 +103,18 @@ const CampaignTracker = () => {
           onActChange={handleActChange}
         />
         
+        {/* Build Selector - positioned between Act and Location selectors */}
+        {buildsData && buildsData.builds && buildsData.builds.length > 0 && (
+          <div className="bg-gray-900 border-b border-gray-800 px-6 py-3">
+            <BuildSelector
+              builds={buildsData.builds}
+              selectedBuildId={selectedBuildId}
+              onBuildChange={handleBuildChange}
+              onClearBuild={handleClearBuild}
+            />
+          </div>
+        )}
+        
         <LocationNavigator
           locations={sortedLocations}
           selectedLocationId={selectedLocationId}
@@ -111,14 +122,18 @@ const CampaignTracker = () => {
         />
 
         <div className="flex flex-col lg:flex-row min-h-[calc(100vh-200px)]">
-          <div className="flex-1 lg:flex-[2] ml-12">
-            <CurrentLocation location={currentLocation} />
+          <div className="flex-1 lg:flex-[2]">
+            <CurrentLocation 
+              location={currentLocation}
+              selectedBuild={selectedBuild}
+            />
           </div>
           
           <div className="flex-1 border-t lg:border-t-0 lg:border-l border-gray-800">
             <NextLocation 
               location={nextLocation} 
               onLocationChange={handleLocationChange}
+              selectedBuild={selectedBuild}
             />
           </div>
         </div>
