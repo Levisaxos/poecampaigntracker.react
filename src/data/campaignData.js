@@ -49,7 +49,7 @@ export const campaignData = {
           locationName: "Clearfell",
           order: 3,
           areaLevel: 2,
-          clearingStrategy: "fast",
+          clearingStrategy: "slow",
           actions: [
             {
               actionId: 1,
@@ -83,7 +83,7 @@ export const campaignData = {
           locationName: "The Mud Burrow",
           order: 4,
           areaLevel: 3,
-          clearingStrategy: "unknown",
+          clearingStrategy: "normal",
           actions: [
             {
               actionId: 1,
