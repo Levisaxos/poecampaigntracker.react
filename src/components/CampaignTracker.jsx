@@ -1,4 +1,7 @@
+// src/components/CampaignTracker.jsx
 import React, { useState } from 'react';
+import Header from './Header';
+import Footer from './Footer';
 import ActSelector from './ActSelector';
 import LocationNavigator from './LocationNavigator';
 import CurrentLocation from './CurrentLocation';
@@ -64,31 +67,37 @@ const CampaignTracker = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <ActSelector
-        acts={campaignData.acts}
-        selectedActId={selectedActId}
-        onActChange={handleActChange}
-      />
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col">
+      <Header />
       
-      <LocationNavigator
-        locations={sortedLocations}
-        selectedLocationId={selectedLocationId}
-        onLocationChange={handleLocationChange}
-      />
-
-      <div className="flex flex-col lg:flex-row min-h-[calc(100vh-140px)]">
-        <div className="flex-1 lg:flex-[2]">
-          <CurrentLocation location={currentLocation} />
-        </div>
+      <div className="flex-1">
+        <ActSelector
+          acts={campaignData.acts}
+          selectedActId={selectedActId}
+          onActChange={handleActChange}
+        />
         
-        <div className="flex-1 border-t lg:border-t-0 lg:border-l border-gray-800">
-          <NextLocation 
-            location={nextLocation} 
-            onLocationChange={handleLocationChange}
-          />
+        <LocationNavigator
+          locations={sortedLocations}
+          selectedLocationId={selectedLocationId}
+          onLocationChange={handleLocationChange}
+        />
+
+        <div className="flex flex-col lg:flex-row min-h-[calc(100vh-200px)]">
+          <div className="flex-1 lg:flex-[2]">
+            <CurrentLocation location={currentLocation} />
+          </div>
+          
+          <div className="flex-1 border-t lg:border-t-0 lg:border-l border-gray-800">
+            <NextLocation 
+              location={nextLocation} 
+              onLocationChange={handleLocationChange}
+            />
+          </div>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 };
