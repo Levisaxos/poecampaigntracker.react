@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/poecampaigntracker.react/static/css/main.09b64291.css",
-    "main.js": "/poecampaigntracker.react/static/js/main.a23d5db1.js",
+    "main.css": "/poecampaigntracker.react/static/css/main.9bc7c091.css",
+    "main.js": "/poecampaigntracker.react/static/js/main.965be815.js",
     "index.html": "/poecampaigntracker.react/index.html",
-    "main.09b64291.css.map": "/poecampaigntracker.react/static/css/main.09b64291.css.map",
-    "main.a23d5db1.js.map": "/poecampaigntracker.react/static/js/main.a23d5db1.js.map"
+    "main.9bc7c091.css.map": "/poecampaigntracker.react/static/css/main.9bc7c091.css.map",
+    "main.965be815.js.map": "/poecampaigntracker.react/static/js/main.965be815.js.map"
   },
   "entrypoints": [
-    "static/css/main.09b64291.css",
-    "static/js/main.a23d5db1.js"
+    "static/css/main.9bc7c091.css",
+    "static/js/main.965be815.js"
   ]
 }
