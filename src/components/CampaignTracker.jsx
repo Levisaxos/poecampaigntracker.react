@@ -6,12 +6,17 @@ import ActSelector from './ActSelector';
 import LocationNavigator from './LocationNavigator';
 import CurrentLocation from './CurrentLocation';
 import NextLocation from './NextLocation';
+import DisclaimerBanner from './DisclaimerBanner';
 import { useCampaignData } from '../hooks/useCampaignData';
 import { useProgressPersistence } from '../hooks/useProgressPersistence';
+import { useUsageAnalytics } from '../hooks/useUsageAnalytics';
 
 const CampaignTracker = () => {
   const { campaignData, loading } = useCampaignData();
   const { selectedActId, selectedLocationId, updateProgress, clearProgress } = useProgressPersistence();
+  
+  // Track usage analytics
+  const { getAnalytics } = useUsageAnalytics();
 
   if (loading || !campaignData) {
     return (
@@ -66,6 +71,7 @@ const CampaignTracker = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col">
+      <DisclaimerBanner />
       <Header clearProgress={clearProgress} />
       
       <div className="flex-1">
@@ -95,7 +101,7 @@ const CampaignTracker = () => {
         </div>
       </div>
       
-      <Footer />
+      <Footer getAnalytics={getAnalytics} />
     </div>
   );
 };

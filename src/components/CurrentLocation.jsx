@@ -1,5 +1,6 @@
 import React from 'react';
 import ActionItem from './ActionItem';
+import LevelingTips from './LevelingTips';
 
 const CurrentLocation = ({ location }) => {
   if (!location) {
@@ -15,7 +16,15 @@ const CurrentLocation = ({ location }) => {
   return (
     <div className="p-6 bg-gray-900">
       <div className="mb-6">
-        <h2 className="text-3xl font-bold text-gray-200 mb-2">{location.locationName}</h2>
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center space-x-4">
+            <h2 className="text-3xl font-bold text-gray-200">{location.locationName}</h2>
+            <span className="text-sm text-blue-400 bg-blue-900 px-2 py-1 rounded border border-blue-700">
+              Level {location.areaLevel || 'Unknown'}
+            </span>
+          </div>
+          <LevelingTips location={location} showStrategyOnly={true} />
+        </div>
         <p className="text-gray-500">Current Area - {sortedActions.length} actions</p>
       </div>
 
@@ -28,6 +37,8 @@ const CurrentLocation = ({ location }) => {
           />
         ))}
       </div>
+
+      <LevelingTips location={location} />
     </div>
   );
 };

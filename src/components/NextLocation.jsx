@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
+import LevelingTips from './LevelingTips';
 
 const NextLocation = ({ location, onLocationChange }) => {
   if (!location) {
@@ -25,15 +26,20 @@ const NextLocation = ({ location, onLocationChange }) => {
       </div>
 
       <div className="mb-4">
-        <h4 className="text-lg font-medium text-gray-300 mb-2 hover:text-gray-200 transition-colors">
-          {location.locationName}
-        </h4>
+        <div className="flex items-center space-x-3 mb-2">
+          <h4 className="text-lg font-medium text-gray-300 hover:text-gray-200 transition-colors">
+            {location.locationName}
+          </h4>
+          <span className="text-sm text-blue-400 bg-blue-900 px-2 py-1 rounded border border-blue-700">
+            Level {location.areaLevel || 'Unknown'}
+          </span>
+        </div>
         <p className="text-gray-500 text-sm">
           {location.actions.length} action{location.actions.length !== 1 ? 's' : ''} to complete
         </p>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 mb-4">
         {location.actions
           .sort((a, b) => a.order - b.order)
           .slice(0, 3)
@@ -52,6 +58,8 @@ const NextLocation = ({ location, onLocationChange }) => {
           </div>
         )}
       </div>
+
+      <LevelingTips location={location} showSummaryOnly={true} />
     </div>
   );
 };

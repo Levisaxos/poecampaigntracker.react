@@ -1,8 +1,26 @@
 // src/components/Footer.jsx
-import React from 'react';
-import { ExternalLink, Github, Shield } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ExternalLink, Github, Shield, Eye } from 'lucide-react';
 
-const Footer = () => {
+const Footer = ({ getAnalytics }) => {
+  const [uniqueUserCount, setUniqueUserCount] = useState(null);
+
+  useEffect(() => {
+    // Get analytics data to display unique user count
+    if (getAnalytics) {
+      try {
+        const currentAnalytics = getAnalytics();
+        if (currentAnalytics) {
+          // Use total visits as our "unique user" count for now
+          const totalVisits = currentAnalytics.totalVisits || 0;
+          setUniqueUserCount(totalVisits);
+        }
+      } catch (error) {
+        console.warn('Failed to get analytics for display:', error);
+      }
+    }
+  }, [getAnalytics]);
+
   return (
     <footer className="bg-gray-950 border-t border-gray-800 mt-8">
       <div className="max-w-7xl mx-auto px-6 py-8">
@@ -55,7 +73,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Legal Info */}
+          {/* Legal Info & Stats */}
           <div>
             <h3 className="text-lg font-semibold text-gray-200 mb-3">Legal</h3>
             <div className="space-y-2">
@@ -69,6 +87,16 @@ const Footer = () => {
               <p className="text-gray-500 text-xs">
                 Path of Exile is a trademark of Grinding Gear Games.
               </p>
+              
+              {/* Usage Stats */}
+              {uniqueUserCount && (
+                <div className="pt-2 border-t border-gray-800">
+                  <div className="inline-flex items-center space-x-2 text-gray-400 text-xs">
+                    <Eye className="w-3 h-3" />
+                    <span>Your visits: {uniqueUserCount}</span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

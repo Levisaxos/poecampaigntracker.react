@@ -8,6 +8,8 @@ export const campaignData = {
           locationId: 1,
           locationName: "The Riverbank",
           order: 1,
+          areaLevel: 1,
+          clearingStrategy: "fast",
           actions: [
             {
               actionId: 1,
@@ -23,6 +25,8 @@ export const campaignData = {
           locationId: 2,
           locationName: "The Clearfell Encampment (Town)",
           order: 2,
+          areaLevel: 2,
+          clearingStrategy: "fast",
           actions: [
             {
               actionId: 1,
@@ -46,6 +50,8 @@ export const campaignData = {
           locationId: 3,
           locationName: "Clearfell",
           order: 3,
+          areaLevel: 3,
+          clearingStrategy: "fast",
           actions: [
             {
               actionId: 1,
@@ -78,6 +84,8 @@ export const campaignData = {
           locationId: 4,
           locationName: "The Mud Burrow",
           order: 4,
+          areaLevel: 4,
+          clearingStrategy: "fast",
           actions: [
             {
               actionId: 1,
