@@ -3,6 +3,7 @@ import React from 'react';
 import ActionItem from './ActionItem';
 import LevelingTips from './LevelingTips';
 import BuildSkills from './BuildSkills';
+import MovementGuide from './MovementGuide';
 import NavigationChevron from './NavigationChevron';
 
 const CurrentLocation = ({ location, selectedBuild, previousLocation, onLocationChange, showLevelTips }) => {
@@ -35,14 +36,17 @@ const CurrentLocation = ({ location, selectedBuild, previousLocation, onLocation
       {/* Main Content */}
       <div className="flex-1 p-6">
         <div className="mb-6">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex items-start justify-between mb-2">
             <div className="flex items-center space-x-4">
               <h2 className="text-3xl font-bold text-gray-200">{location.locationName}</h2>
               <span className="text-sm text-blue-400 bg-blue-900 px-2 py-1 rounded border border-blue-700">
-                Area Level: {location.areaLevel || 'Unknown'}
+                Area Level: {location.areaLevel == -1 ? 'Unknown' : location.areaLevel || 'Unknown'}
               </span>
             </div>
-            {showLevelTips && <LevelingTips location={location} showStrategyOnly={true} />}
+            <div className="flex flex-col items-end space-y-2">
+              {showLevelTips && <LevelingTips location={location} showStrategyOnly={true} />}
+              <MovementGuide movementGuide={location.movementGuide} compact={true} />
+            </div>
           </div>
           <p className="text-gray-500">Current Area - {sortedActions.length} actions</p>
         </div>

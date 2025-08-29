@@ -1,4 +1,3 @@
-// src/components/NextLocation.jsx
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import LevelingTips from './LevelingTips';
@@ -35,7 +34,7 @@ const NextLocation = ({ location, selectedBuild, showLevelTips }) => {
         <p className="text-gray-500 text-sm">
           {location.actions.length} action{location.actions.length !== 1 ? 's' : ''} to complete
         </p>
-      </div>
+      </div>      
 
       <div className="space-y-2 mb-4">
         {location.actions

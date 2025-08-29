@@ -9,7 +9,7 @@ export const campaignData = {
           locationName: "The Riverbank",
           order: 1,
           areaLevel: 1,
-          clearingStrategy: "fast",
+          clearingStrategy: "slow",
           actions: [
             {
               actionId: 1,
@@ -50,6 +50,7 @@ export const campaignData = {
           order: 3,
           areaLevel: 2,
           clearingStrategy: "slow",
+          movementGuide: "Hug outside wall and look for everything",
           actions: [
             {
               actionId: 1,
@@ -83,7 +84,8 @@ export const campaignData = {
           locationName: "The Mud Burrow",
           order: 4,
           areaLevel: 3,
-          clearingStrategy: "normal",
+          clearingStrategy: "slow",
+          movementGuide: "Hug outside wall",
           actions: [
             {
               actionId: 1,
@@ -108,7 +110,8 @@ export const campaignData = {
           locationName: "The Grelwood (Part 1)",
           order: 5,
           areaLevel: 4,
-          clearingStrategy: "unknown",
+          clearingStrategy: "normal",
+          movementGuide: "4 events in diamond shape",
           actions: [
             {
               actionId: 1,
@@ -175,7 +178,8 @@ export const campaignData = {
           locationName: "The Red Vale and The Grelwood (Part 2)",
           order: 6,
           areaLevel: 5,
-          clearingStrategy: "unknown",
+          clearingStrategy: "normal",
+          movementGuide: "1 pillar on island. 2 on main.",
           actions: [
             {
               actionId: 1,
@@ -241,7 +245,8 @@ export const campaignData = {
           locationName: "The Grim Tangle",
           order: 7,
           areaLevel: 6,
-          clearingStrategy: "unknown",
+          clearingStrategy: "normal",
+          movementGuide: "Ress at checkpoint when Una starts to sing",
           actions: [
             {
               actionId: 1,
@@ -266,7 +271,8 @@ export const campaignData = {
           locationName: "The Cemetery of the Eternals (Part 1)",
           order: 8,
           areaLevel: 7,
-          clearingStrategy: "unknown",
+          clearingStrategy: "normal",
+          movementGuide: "Hug wall away from start point.",
           actions: [
             {
               actionId: 1,
@@ -292,7 +298,8 @@ export const campaignData = {
           locationName: "Mausoleum of the Praetor",
           order: 9,
           areaLevel: 9,
-          clearingStrategy: "unknown",
+          clearingStrategy: "normal",
+          movementGuide: "Most likely opposite quadrant",
           actions: [
             {
               actionId: 1,
@@ -325,7 +332,8 @@ export const campaignData = {
           locationName: "Tomb of the Consort",
           order: 10,
           areaLevel: 9,
-          clearingStrategy: "unknown",
+          clearingStrategy: "normal",
+          movementGuide: "Hug a wall away from spawn",
           actions: [
             {
               actionId: 1,
@@ -359,7 +367,8 @@ export const campaignData = {
           locationName: "The Cemetery of the Eternals (Part 2)",
           order: 11,
           areaLevel: 9,
-          clearingStrategy: "unknown",
+          clearingStrategy: "fast",
+          movementGuide: "Kill lachlan",
           actions: [
             {
               actionId: 1,
@@ -394,7 +403,8 @@ export const campaignData = {
           locationName: "The Hunting Grounds",
           order: 12,
           areaLevel: 10,
-          clearingStrategy: "unknown",
+          clearingStrategy: "slow",
+          movementGuide: "Hug outside wall. Ritual can be reset for good xp",
           actions: [
             {
               actionId: 1,
@@ -443,7 +453,8 @@ export const campaignData = {
           locationName: "Freythorn (Permanent Buff Side Quest)",
           order: 13,
           areaLevel: 11,
-          clearingStrategy: "unknown",
+          clearingStrategy: "normal",
+          movementGuide: "Kill king of the mists",
           actions: [
             {
               actionId: 1,
@@ -504,7 +515,8 @@ export const campaignData = {
           locationName: "Ogham Farmlands",
           order: 14,
           areaLevel: 12,
-          clearingStrategy: "unknown",
+          clearingStrategy: "normal",
+          movementGuide: "Una's lute in line with entrance",
           actions: [
             {
               actionId: 1,
@@ -546,7 +558,8 @@ export const campaignData = {
           locationName: "Ogham Village",
           order: 15,
           areaLevel: 13,
-          clearingStrategy: "unknown",
+          clearingStrategy: "normal",
+          movementGuide: "Hug a wall. Press U to see executioners direction",
           actions: [
             {
               actionId: 1,
@@ -588,7 +601,8 @@ export const campaignData = {
           locationName: "The Manor Ramparts",
           order: 16,
           areaLevel: 14,
-          clearingStrategy: "unknown",
+          clearingStrategy: "slow",
+          movementGuide: "Often a U turn",
           actions: [
             {
               actionId: 1,
@@ -638,7 +652,8 @@ export const campaignData = {
           locationName: "Ogham Manor",
           order: 17,
           areaLevel: 15,
-          clearingStrategy: "unknown",
+          clearingStrategy: "normal",
+          movementGuide: "Bridges are in same direction on different floors",
           actions: [
             {
               actionId: 1,
@@ -678,7 +693,8 @@ export const campaignData = {
           locationName: "Vastiri Outskirts",
           order: 1,
           areaLevel: 16,
-          clearingStrategy: "unknown",
+          clearingStrategy: "slow",
+          movementGuide: "Hug a wall. Rathbreaker is diagonal from start",
           actions: [
             {
               actionId: 1,
@@ -704,12 +720,21 @@ export const campaignData = {
               action: "Enter the Caravan",
               reward: null,
             },
+            {
+              actionId: 4,
+              order: 4,
+              isOptional: false,
+              isRecommended: true,
+              action: "Ditch cold res. Get fire resistances for balbala",
+              reward: null,
+            },
           ],
         },
         {
           locationId: 19,
           locationName: "Ardura Caravan (Town)",
           order: 2,
+          areaLevel: -1,
           actions: [
             {
               actionId: 1,
@@ -751,6 +776,9 @@ export const campaignData = {
           locationId: 20,
           locationName: "Mawdun Quarry",
           order: 3,
+          areaLevel: -1,
+          clearingStrategy: "slow",
+          movementGuide: "Checkpoint across bridge",
           actions: [
             {
               actionId: 1,
@@ -767,6 +795,9 @@ export const campaignData = {
           locationId: 21,
           locationName: "Mawdun Mine (and Town)",
           order: 4,
+          areaLevel: -1,
+          clearingStrategy: "fast",
+          movementGuide: "Boss is always north. Hug a wall",
           actions: [
             {
               actionId: 1,
@@ -822,6 +853,9 @@ export const campaignData = {
           locationId: 22,
           locationName: "Traitor's Passage",
           order: 5,
+          areaLevel: -1,
+          clearingStrategy: "slow",
+          movementGuide: "Follow direction map is pointing in",
           actions: [
             {
               actionId: 1,
@@ -853,6 +887,10 @@ export const campaignData = {
           locationId: 23,
           locationName: "The Halani Gates (Part 1)",
           order: 6,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide:
+            "After 2nd bridge there is a CP and pack of statues. Reset until lvl 20",
           actions: [
             {
               actionId: 1,
@@ -910,6 +948,8 @@ export const campaignData = {
           locationId: 24,
           locationName: "Trial of the Sekhemas (Ascendancy Unlock)",
           order: 7,
+          areaLevel: -1,
+          clearingStrategy: "normal",
           actions: [
             {
               actionId: 1,
@@ -1015,6 +1055,9 @@ export const campaignData = {
           locationId: 25,
           locationName: "Keth",
           order: 8,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "Hug a wall",
           actions: [
             {
               actionId: 1,
@@ -1059,12 +1102,24 @@ export const campaignData = {
                 "Exit to the Lost City (opposite side of zone entrance, after big bridge)",
               reward: null,
             },
+            {
+              actionId: 6,
+              order: 6,
+              isOptional: false,
+              isRecommended: true,
+              action: "Ditch fire res. Get lightning resistances",
+              reward: null,
+            },
           ],
         },
         {
           locationId: 26,
           locationName: "The Lost City",
           order: 9,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide:
+            "Entrance direction points to next zone. Cross a bridge",
           actions: [
             {
               actionId: 1,
@@ -1096,6 +1151,9 @@ export const campaignData = {
           locationId: 27,
           locationName: "Buried Shrines",
           order: 10,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "Hug a wall",
           actions: [
             {
               actionId: 1,
@@ -1153,6 +1211,9 @@ export const campaignData = {
           locationId: 28,
           locationName: "Mastodon Badlands",
           order: 11,
+          areaLevel: -1,
+          clearingStrategy: "fast",
+          movementGuide: "Hug a wall",
           actions: [
             {
               actionId: 1,
@@ -1176,6 +1237,9 @@ export const campaignData = {
           locationId: 29,
           locationName: "The Bone Pits",
           order: 12,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "First corridor points to direction of boss",
           actions: [
             {
               actionId: 1,
@@ -1215,6 +1279,9 @@ export const campaignData = {
           locationId: 30,
           locationName: "The Valley of the Titans",
           order: 13,
+          areaLevel: -1,
+          clearingStrategy: "fast",
+          movementGuide: "Hug a wall",
           actions: [
             {
               actionId: 1,
@@ -1256,6 +1323,9 @@ export const campaignData = {
           locationId: 31,
           locationName: "The Titan Grotto and Halani Gates (Part 2)",
           order: 14,
+          areaLevel: -1,
+          clearingStrategy: "fast",
+          movementGuide: "Hug a wall",
           actions: [
             {
               actionId: 1,
@@ -1312,6 +1382,9 @@ export const campaignData = {
           locationId: 32,
           locationName: "Deshar",
           order: 15,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "Exut usually far away from start",
           actions: [
             {
               actionId: 1,
@@ -1336,6 +1409,9 @@ export const campaignData = {
           locationId: 33,
           locationName: "The Path of Mourning",
           order: 16,
+          areaLevel: -1,
+          clearingStrategy: "fast",
+          movementGuide: "Stay central. Choose middle if 3 options",
           actions: [
             {
               actionId: 1,
@@ -1383,6 +1459,9 @@ export const campaignData = {
           locationId: 34,
           locationName: "The Spires of Deshar",
           order: 17,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "Hug a wall for boss",
           actions: [
             {
               actionId: 1,
@@ -1448,6 +1527,9 @@ export const campaignData = {
           locationId: 35,
           locationName: "The Dreadnought",
           order: 18,
+          areaLevel: -1,
+          clearingStrategy: "slow",
+          movementGuide: "",
           actions: [
             {
               actionId: 1,
@@ -1472,6 +1554,9 @@ export const campaignData = {
           locationId: 36,
           locationName: "The Dreadnought Vanguard",
           order: 19,
+          areaLevel: -1,
+          clearingStrategy: "slow",
+          movementGuide: "",
           actions: [
             {
               actionId: 1,
@@ -1527,6 +1612,9 @@ export const campaignData = {
           locationId: 37,
           locationName: "Sandswept Marsh",
           order: 1,
+          areaLevel: -1,
+          clearingStrategy: "fast",
+          movementGuide: "Cross bridge",
           actions: [
             {
               actionId: 1,
@@ -1566,6 +1654,7 @@ export const campaignData = {
           locationId: 38,
           locationName: "Ziggurat Encampment",
           order: 2,
+          areaLevel: -1,
           actions: [
             {
               actionId: 1,
@@ -1597,6 +1686,9 @@ export const campaignData = {
           locationId: 39,
           locationName: "Jungle Ruins",
           order: 3,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "Silverfist is always facing infested barrens",
           actions: [
             {
               actionId: 1,
@@ -1609,8 +1701,8 @@ export const campaignData = {
             {
               actionId: 2,
               order: 2,
-              isOptional: true,
-              isRecommended: false,
+              isOptional: false,
+              isRecommended: true,
               action:
                 "Summon the NPC to the Jungle Grave (only if accidentally found or belt is very bad)",
               reward: "Rare Belt",
@@ -1646,6 +1738,9 @@ export const campaignData = {
           locationId: 40,
           locationName: "The Venom Crypts (Permanent Buff)",
           order: 4,
+          areaLevel: -1,
+          clearingStrategy: "fast",
+          movementGuide: "Good luck!",
           actions: [
             {
               actionId: 1,
@@ -1687,6 +1782,9 @@ export const campaignData = {
           locationId: 41,
           locationName: "Infested Barrens",
           order: 5,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "Hug a wall with water",
           actions: [
             {
               actionId: 1,
@@ -1745,6 +1843,9 @@ export const campaignData = {
           locationId: 42,
           locationName: "The Azak Bog (Permanent Buff)",
           order: 6,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "Hug east wall. Boss always north",
           actions: [
             {
               actionId: 1,
@@ -1794,6 +1895,9 @@ export const campaignData = {
           locationId: 43,
           locationName: "Chimeral Wetlands",
           order: 7,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "Hug a wall",
           actions: [
             {
               actionId: 1,
@@ -1835,6 +1939,9 @@ export const campaignData = {
           locationId: 44,
           locationName: "Jiquani's Machinarium",
           order: 8,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "",
           actions: [
             {
               actionId: 1,
@@ -1900,6 +2007,9 @@ export const campaignData = {
           locationId: 45,
           locationName: "Jiquani's Sanctum",
           order: 9,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "",
           actions: [
             {
               actionId: 1,
@@ -1993,6 +2103,9 @@ export const campaignData = {
           locationId: 46,
           locationName: "The Matlan Waterways",
           order: 10,
+          areaLevel: -1,
+          clearingStrategy: "fast",
+          movementGuide: "",
           actions: [
             {
               actionId: 1,
@@ -2026,6 +2139,9 @@ export const campaignData = {
           locationId: 47,
           locationName: "The Trial of Chaos (Ascendancy Passives 3 and 4)",
           order: 11,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "",
           actions: [
             {
               actionId: 1,
@@ -2073,6 +2189,9 @@ export const campaignData = {
           locationId: 48,
           locationName: "The Drowned City",
           order: 12,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "",
           actions: [
             {
               actionId: 1,
@@ -2131,6 +2250,9 @@ export const campaignData = {
           locationId: 49,
           locationName: "The Molten Vault (Reforging Bench Unlock)",
           order: 13,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "",
           actions: [
             {
               actionId: 1,
@@ -2172,6 +2294,9 @@ export const campaignData = {
           locationId: 50,
           locationName: "The Apex of Filth",
           order: 14,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "Hug inner wall",
           actions: [
             {
               actionId: 1,
@@ -2230,6 +2355,9 @@ export const campaignData = {
           locationId: 51,
           locationName: "The Temple of Kopec",
           order: 15,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "Can be left top or right",
           actions: [
             {
               actionId: 1,
@@ -2296,6 +2424,9 @@ export const campaignData = {
           locationId: 52,
           locationName: "Utzaal (Past)",
           order: 16,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "South east, main way.",
           actions: [
             {
               actionId: 1,
@@ -2328,6 +2459,9 @@ export const campaignData = {
           locationId: 53,
           locationName: "Aggorat (Past)",
           order: 17,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "Find pyramid. After second pyramid follow the voice",
           actions: [
             {
               actionId: 1,
@@ -2369,6 +2503,9 @@ export const campaignData = {
           locationId: 54,
           locationName: "The Black Chambers (Past)",
           order: 18,
+          areaLevel: -1,
+          clearingStrategy: "normal",
+          movementGuide: "Go left first then straight into entrance pointed direction",
           actions: [
             {
               actionId: 1,

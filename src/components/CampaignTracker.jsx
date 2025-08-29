@@ -6,7 +6,6 @@ import ActSelector from './ActSelector';
 import LocationNavigator from './LocationNavigator';
 import CurrentLocation from './CurrentLocation';
 import NextLocation from './NextLocation';
-import BuildSelector from './BuildSelector';
 import DisclaimerBanner from './DisclaimerBanner';
 import NavigationChevron from './NavigationChevron';
 import { useCampaignData } from '../hooks/useCampaignData';
@@ -136,19 +135,12 @@ const CampaignTracker = () => {
           acts={campaignData.acts}
           selectedActId={selectedActId}
           onActChange={handleActChange}
+          showBuilds={options.showBuilds}
+          builds={buildsData?.builds}
+          selectedBuildId={selectedBuildId}
+          onBuildChange={handleBuildChange}
+          onClearBuild={handleClearBuild}
         />
-        
-        {/* Build Selector - only show if builds are enabled */}
-        {options.showBuilds && buildsData && buildsData.builds && buildsData.builds.length > 0 && (
-          <div className="bg-gray-900 border-b border-gray-800 px-6 py-3">
-            <BuildSelector
-              builds={buildsData.builds}
-              selectedBuildId={selectedBuildId}
-              onBuildChange={handleBuildChange}
-              onClearBuild={handleClearBuild}
-            />
-          </div>
-        )}
         
         <LocationNavigator
           locations={sortedLocations}
