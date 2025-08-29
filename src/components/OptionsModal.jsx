@@ -1,6 +1,6 @@
 // src/components/OptionsModal.jsx
 import React from 'react';
-import { X, Settings } from 'lucide-react';
+import { X, Settings, EyeOff } from 'lucide-react';
 
 const OptionsModal = ({ isOpen, onClose, options, onOptionsChange }) => {
   if (!isOpen) return null;
@@ -12,9 +12,37 @@ const OptionsModal = ({ isOpen, onClose, options, onOptionsChange }) => {
     });
   };
 
+  const ToggleSwitch = ({ checked, onChange, label, description }) => (
+    <div className="flex items-center justify-between">
+      <div>
+        <label className="text-sm font-medium text-gray-200">
+          {label}
+        </label>
+        <p className="text-xs text-gray-400 mt-1">
+          {description}
+        </p>
+      </div>
+      <label className="relative inline-flex items-center cursor-pointer">
+        <input
+          type="checkbox"
+          className="sr-only"
+          checked={checked}
+          onChange={onChange}
+        />
+        <div className={`w-11 h-6 rounded-full transition-colors ${
+          checked ? 'bg-blue-600' : 'bg-gray-600'
+        }`}>
+          <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform ${
+            checked ? 'translate-x-5' : 'translate-x-0'
+          } mt-0.5 ml-0.5`} />
+        </div>
+      </label>
+    </div>
+  );
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-gray-800 rounded-lg shadow-xl max-w-md w-full mx-4 border border-gray-700">
+      <div className="bg-gray-800 rounded-lg shadow-xl max-w-md w-full mx-4 border border-gray-700 max-h-[80vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b border-gray-700">
           <div className="flex items-center space-x-2">
             <Settings className="w-5 h-5 text-gray-300" />
@@ -28,92 +56,57 @@ const OptionsModal = ({ isOpen, onClose, options, onOptionsChange }) => {
           </button>
         </div>
 
-        <div className="p-6 space-y-6">
+        <div className="p-6 space-y-8">
+          {/* Display Options */}
           <div className="space-y-4">
             <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide">
               Display Options
             </h3>
             
-            {/* Build System Option */}
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-sm font-medium text-gray-200">
-                  Build System
-                </label>
-                <p className="text-xs text-gray-400 mt-1">
-                  Show build selector and build-specific skills
-                </p>
-              </div>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="sr-only"
-                  checked={options.showBuilds}
-                  onChange={(e) => handleOptionChange('showBuilds', e.target.checked)}
-                />
-                <div className={`w-11 h-6 rounded-full transition-colors ${
-                  options.showBuilds ? 'bg-blue-600' : 'bg-gray-600'
-                }`}>
-                  <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform ${
-                    options.showBuilds ? 'translate-x-5' : 'translate-x-0'
-                  } mt-0.5 ml-0.5`} />
-                </div>
-              </label>
-            </div>
+            <ToggleSwitch
+              checked={options.showBuilds}
+              onChange={(e) => handleOptionChange('showBuilds', e.target.checked)}
+              label="Build System"
+              description="Show build selector and build-specific skills"
+            />
 
-            {/* Level Tips Option */}
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-sm font-medium text-gray-200">
-                  Level Tips
-                </label>
-                <p className="text-xs text-gray-400 mt-1">
-                  Show leveling tips and gear recommendations
-                </p>
-              </div>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="sr-only"
-                  checked={options.showLevelTips}
-                  onChange={(e) => handleOptionChange('showLevelTips', e.target.checked)}
-                />
-                <div className={`w-11 h-6 rounded-full transition-colors ${
-                  options.showLevelTips ? 'bg-blue-600' : 'bg-gray-600'
-                }`}>
-                  <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform ${
-                    options.showLevelTips ? 'translate-x-5' : 'translate-x-0'
-                  } mt-0.5 ml-0.5`} />
-                </div>
-              </label>
-            </div>
+            <ToggleSwitch
+              checked={options.showLevelTips}
+              onChange={(e) => handleOptionChange('showLevelTips', e.target.checked)}
+              label="Level Tips"
+              description="Show leveling tips and gear recommendations"
+            />
 
-            {/* Next Location Option */}
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-sm font-medium text-gray-200">
-                  Next Location Panel
-                </label>
-                <p className="text-xs text-gray-400 mt-1">
-                  Show detailed next location information
-                </p>
-              </div>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="sr-only"
-                  checked={options.showNextLocation}
-                  onChange={(e) => handleOptionChange('showNextLocation', e.target.checked)}
-                />
-                <div className={`w-11 h-6 rounded-full transition-colors ${
-                  options.showNextLocation ? 'bg-blue-600' : 'bg-gray-600'
-                }`}>
-                  <div className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform ${
-                    options.showNextLocation ? 'translate-x-5' : 'translate-x-0'
-                  } mt-0.5 ml-0.5`} />
-                </div>
-              </label>
+            <ToggleSwitch
+              checked={options.showNextLocation}
+              onChange={(e) => handleOptionChange('showNextLocation', e.target.checked)}
+              label="Next Location Panel"
+              description="Show detailed next location information"
+            />
+          </div>
+
+          {/* Action Filtering Options */}
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2">
+              <EyeOff className="w-4 h-4 text-gray-400" />
+              <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide">
+                Action Filtering
+              </h3>
             </div>
+            
+            <ToggleSwitch
+              checked={options.hideOptional}
+              onChange={(e) => handleOptionChange('hideOptional', e.target.checked)}
+              label="Hide Optional Actions"
+              description="Hide actions marked as optional to focus on required content"
+            />
+
+            <ToggleSwitch
+              checked={options.hideRecommended}
+              onChange={(e) => handleOptionChange('hideRecommended', e.target.checked)}
+              label="Hide Recommended Actions"
+              description="Hide actions marked as recommended (keeps required and optional)"
+            />            
           </div>
         </div>
 

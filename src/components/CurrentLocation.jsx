@@ -6,7 +6,7 @@ import BuildSkills from './BuildSkills';
 import MovementGuide from './MovementGuide';
 import NavigationChevron from './NavigationChevron';
 
-const CurrentLocation = ({ location, selectedBuild, previousLocation, onLocationChange, showLevelTips }) => {
+const CurrentLocation = ({ location, selectedBuild, previousLocation, onLocationChange, showLevelTips, options }) => {
   if (!location) {
     return (
       <div className="p-6 bg-gray-900">
@@ -15,7 +15,52 @@ const CurrentLocation = ({ location, selectedBuild, previousLocation, onLocation
     );
   }
 
+  // Filter and sort actions based on priority (Required > Recommended > Optional) then by order
+  const filterAndSortActions = (actions) => {
+    if (!options) {
+      return actions.sort((a, b) => a.order - b.order);
+    }
+    
+    // First filter based on options
+    const filtered = actions.filter(action => {
+      // If hideOptional is true, hide actions that are optional (but not recommended)
+      if (options.hideOptional && action.isOptional && !action.isRecommended) {
+        return false;
+      }
+      
+      // If hideRecommended is true, hide actions that are recommended
+      if (options.hideRecommended && action.isRecommended) {
+        return false;
+      }
+      
+      return true;
+    });
+    
+    // Then sort by priority first, then by order
+    return filtered.sort((a, b) => {
+      // Get priority values: Required = 0, Recommended = 1, Optional = 2
+      const getPriority = (action) => {
+        if (!action.isOptional && !action.isRecommended) return 0; // Required
+        if (action.isRecommended) return 1; // Recommended
+        return 2; // Optional
+      };
+      
+      const priorityA = getPriority(a);
+      const priorityB = getPriority(b);
+      
+      // If priorities are different, sort by priority
+      if (priorityA !== priorityB) {
+        return priorityA - priorityB;
+      }
+      
+      // If same priority, sort by order
+      return a.order - b.order;
+    });
+  };
+
   const sortedActions = location.actions.sort((a, b) => a.order - b.order);
+  const filteredActions = filterAndSortActions(location.actions);
+  const hiddenActionCount = sortedActions.length - filteredActions.length;
 
   const handlePreviousClick = () => {
     if (previousLocation) {
@@ -48,17 +93,35 @@ const CurrentLocation = ({ location, selectedBuild, previousLocation, onLocation
               <MovementGuide movementGuide={location.movementGuide} compact={true} />
             </div>
           </div>
-          <p className="text-gray-500">Current Area - {sortedActions.length} actions</p>
+          <div className="flex items-center space-x-4">
+            <p className="text-gray-500">
+              Current Area - {filteredActions.length} action{filteredActions.length !== 1 ? 's' : ''}
+            </p>
+            {hiddenActionCount > 0 && (
+              <p className="text-gray-600 text-sm">
+                ({hiddenActionCount} hidden by filters)
+              </p>
+            )}
+          </div>
         </div>
 
         <div className="space-y-4">
-          {sortedActions.map(action => (
+          {filteredActions.map(action => (
             <ActionItem
               key={`${location.locationId}-${action.actionId}`}
               action={action}
               detailed={true}
             />
           ))}
+          
+          {filteredActions.length === 0 && sortedActions.length > 0 && (
+            <div className="bg-gray-800 border border-gray-600 rounded p-4 text-center">
+              <p className="text-gray-400">All actions are hidden by current filters.</p>
+              <p className="text-gray-500 text-sm mt-1">
+                Check your options to show optional or recommended actions.
+              </p>
+            </div>
+          )}
         </div>
 
         {showLevelTips && (

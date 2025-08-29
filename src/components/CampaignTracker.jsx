@@ -158,6 +158,7 @@ const CampaignTracker = () => {
               previousLocation={previousLocation}
               onLocationChange={handleLocationChange}
               showLevelTips={options.showLevelTips}
+              options={options}
             />
           </div>
           

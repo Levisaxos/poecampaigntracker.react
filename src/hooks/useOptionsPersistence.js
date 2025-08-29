@@ -6,7 +6,9 @@ const OPTIONS_STORAGE_KEY = 'poe2-tracker-options';
 const DEFAULT_OPTIONS = {
   showBuilds: true,
   showLevelTips: true,
-  showNextLocation: true
+  showNextLocation: true,
+  hideOptional: false,
+  hideRecommended: false
 };
 
 export const useOptionsPersistence = () => {
