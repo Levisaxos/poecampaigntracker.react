@@ -62,6 +62,30 @@ const CurrentLocation = ({ location, selectedBuild, previousLocation, onLocation
   const filteredActions = filterAndSortActions(location.actions);
   const hiddenActionCount = sortedActions.length - filteredActions.length;
 
+  // Count actions by type for display
+  const getActionCounts = (actions) => {
+    const counts = {
+      required: 0,
+      recommended: 0,
+      optional: 0
+    };
+
+    actions.forEach(action => {
+      if (!action.isOptional && !action.isRecommended) {
+        counts.required++;
+      } else if (action.isRecommended) {
+        counts.recommended++;
+      } else {
+        counts.optional++;
+      }
+    });
+
+    return counts;
+  };
+
+  const actionCounts = getActionCounts(filteredActions);
+  const totalActions = actionCounts.required + actionCounts.recommended + actionCounts.optional;
+
   const handlePreviousClick = () => {
     if (previousLocation) {
       onLocationChange(previousLocation.locationId);
@@ -82,30 +106,50 @@ const CurrentLocation = ({ location, selectedBuild, previousLocation, onLocation
       <div className="flex-1 p-6">
         <div className="mb-6">
           <div className="flex items-start justify-between mb-2">
-            <div className="flex-1">
-              <h2 className="text-3xl font-bold text-gray-200 mb-3">{location.locationName}</h2>
-              
-              {/* Level and Clearing Strategy on same line */}
-              <div className="flex items-center space-x-4 mb-2">
-                <span className="text-sm text-blue-400 bg-blue-900 px-2 py-1 rounded border border-blue-700">
-                  Area Level: {location.areaLevel == -1 ? 'Unknown' : location.areaLevel || 'Unknown'}
-                </span>
-                {showLevelTips && <LevelingTips location={location} showStrategyOnly={true} />}
-              </div>
-              
-              {/* Movement Guide on separate line with full width */}
-              {location.movementGuide && (
-                <div className="mt-2">
-                  <MovementGuide movementGuide={location.movementGuide} compact={true} />
-                </div>
-              )}
-            </div>
-          </div>
+  <div className="flex items-center space-x-4">
+    <h2 className="text-3xl font-bold text-gray-200">{location.locationName}</h2>
+    <span className="text-sm text-blue-400 bg-blue-900 px-2 py-1 rounded border border-blue-700">
+      Area Level: {location.areaLevel == -1 ? 'Unknown' : location.areaLevel || 'Unknown'}
+    </span>
+  </div>
+  {showLevelTips && (
+    <div className="flex-shrink-0">
+      <LevelingTips location={location} showStrategyOnly={true} />
+    </div>
+  )}
+</div>
           
+          {/* Movement Guide on separate line with full width */}
+          {location.movementGuide && (
+            <div className="mb-4">
+              <MovementGuide movementGuide={location.movementGuide} compact={true} />
+            </div>
+          )}
+          
+          {/* Action counts in format: "2 (**1**, **1**) actions" */}
           <div className="flex items-center space-x-4">
-            <p className="text-gray-500">
-              Current Area - {filteredActions.length} action{filteredActions.length !== 1 ? 's' : ''}
-            </p>
+            <div className="flex items-center text-gray-500">
+              <span>{totalActions}</span>
+              <span className='ml-1'>(</span>
+              {actionCounts.required > 0 && (
+                <>
+                  <span className="text-red-400 font-bold">{actionCounts.required}</span>
+                  {(actionCounts.recommended > 0 || actionCounts.optional > 0) && <span>, </span>}
+                </>
+              )}
+              {actionCounts.recommended > 0 && (
+                <>
+                  <span className="text-green-400 font-bold">{actionCounts.recommended}</span>
+                  {actionCounts.optional > 0 && <span>, </span>}
+                </>
+              )}
+              {actionCounts.optional > 0 && (
+                <span className="text-gray-400 font-bold">{actionCounts.optional}</span>
+              )}
+              <span className='mr-1'>)</span>
+              <span>action{totalActions !== 1 ? 's' : ''}</span>
+            </div>
+            
             {hiddenActionCount > 0 && (
               <p className="text-gray-600 text-sm">
                 ({hiddenActionCount} hidden by filters)
