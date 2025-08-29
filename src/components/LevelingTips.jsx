@@ -131,7 +131,6 @@ const LevelingTips = ({ location, showStrategyOnly = false, showSummaryOnly = fa
 
   // If no area level is set, don't show any tips
   if (!location.areaLevel && location.areaLevel !== 0) {
-    console.log('No area level found for location:', location.locationName);
     return null;
   }
 
@@ -139,7 +138,6 @@ const LevelingTips = ({ location, showStrategyOnly = false, showSummaryOnly = fa
   const relevantLevels = getApplicableLevels(location.areaLevel);
 
   if (relevantLevels.length === 0) {
-    console.log('No relevant levels found for area level:', location.areaLevel);
     return null;
   }
 
@@ -148,11 +146,11 @@ const LevelingTips = ({ location, showStrategyOnly = false, showSummaryOnly = fa
   }
 
   return (
-    <div className="mt-6">
+    <div className="mt-4">
       <div className="space-y-4">
         {relevantLevels.map((levelData, levelIndex) => (
           <div key={levelData.level}>
-            <h3 className="text-lg font-medium text-gray-300 mb-3">
+            <h3 className="text-lg font-medium text-gray-300 mb-2">
               Level {levelData.level}
             </h3>
 
@@ -176,7 +174,7 @@ const LevelingTips = ({ location, showStrategyOnly = false, showSummaryOnly = fa
                             <span className="font-medium text-gray-200">{item.itemType}</span>
                             <span className="text-gray-500">-</span>
                             <span className={`px-2 py-1 rounded text-xs border ${getPriorityColor(levelData.priority)}`}>
-                              {levelData.priority}
+                              Priority: {levelData.priority}
                             </span>
                             {hasInstructions && (
                               <div className="flex items-center space-x-1 ml-2">

@@ -5,14 +5,14 @@ const ActionItem = ({ action, detailed = false }) => {
   const actionTag = getActionTag(action);
   
   return (
-    <div className={`p-4 rounded ${getActionStyle(action)}`}>
+    <div className={`p-2 rounded ${getActionStyle(action)}`}>
       <div className="flex items-start space-x-3">
         <div className="flex-shrink-0 mt-1">
           {getActionIcon(action)}
         </div>
         
         <div className="flex-1">
-          <div className="flex items-start justify-between mb-2">
+          <div className="flex items-start justify-between">
             <p className="font-medium flex-1 mr-3">{action.action}</p>
             <span className={actionTag.className}>
               {actionTag.text}
