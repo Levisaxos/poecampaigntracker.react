@@ -272,7 +272,7 @@ export const campaignData = {
           order: 8,
           areaLevel: 7,
           clearingStrategy: "normal",
-          movementGuide: "Hug wall away from start point.",
+          movementGuide: "Enter one, get checkpoint, exit and find 2nd for both to be lvl 9 area's",
           actions: [
             {
               actionId: 1,
