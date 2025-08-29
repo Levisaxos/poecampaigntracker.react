@@ -82,17 +82,26 @@ const CurrentLocation = ({ location, selectedBuild, previousLocation, onLocation
       <div className="flex-1 p-6">
         <div className="mb-6">
           <div className="flex items-start justify-between mb-2">
-            <div className="flex items-center space-x-4">
-              <h2 className="text-3xl font-bold text-gray-200">{location.locationName}</h2>
-              <span className="text-sm text-blue-400 bg-blue-900 px-2 py-1 rounded border border-blue-700">
-                Area Level: {location.areaLevel == -1 ? 'Unknown' : location.areaLevel || 'Unknown'}
-              </span>
-            </div>
-            <div className="flex flex-col items-end space-y-2">
-              {showLevelTips && <LevelingTips location={location} showStrategyOnly={true} />}
-              <MovementGuide movementGuide={location.movementGuide} compact={true} />
+            <div className="flex-1">
+              <h2 className="text-3xl font-bold text-gray-200 mb-3">{location.locationName}</h2>
+              
+              {/* Level and Clearing Strategy on same line */}
+              <div className="flex items-center space-x-4 mb-2">
+                <span className="text-sm text-blue-400 bg-blue-900 px-2 py-1 rounded border border-blue-700">
+                  Area Level: {location.areaLevel == -1 ? 'Unknown' : location.areaLevel || 'Unknown'}
+                </span>
+                {showLevelTips && <LevelingTips location={location} showStrategyOnly={true} />}
+              </div>
+              
+              {/* Movement Guide on separate line with full width */}
+              {location.movementGuide && (
+                <div className="mt-2">
+                  <MovementGuide movementGuide={location.movementGuide} compact={true} />
+                </div>
+              )}
             </div>
           </div>
+          
           <div className="flex items-center space-x-4">
             <p className="text-gray-500">
               Current Area - {filteredActions.length} action{filteredActions.length !== 1 ? 's' : ''}
