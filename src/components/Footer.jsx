@@ -29,10 +29,22 @@ const Footer = ({ getAnalytics }) => {
               <p className="text-gray-400 text-sm">Created by Levisaxos</p>
               <div>
                 <a 
-                  href="https://github.com/Levisaxos" 
+                  href="https://github.com/Levisaxos/poecampaigntracker.react" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors text-sm"
+                >
+                  <Github className="w-4 h-4" />
+                  <span>View Repository</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+              <div>
+                <a 
+                  href="https://github.com/Levisaxos" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 text-gray-500 hover:text-gray-400 transition-colors text-sm"
                 >
                   <Github className="w-4 h-4" />
                   <span>GitHub Profile</span>
